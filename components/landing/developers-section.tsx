@@ -8,7 +8,7 @@ const codeExamples = [
     label: "Ask in Slack",
     code: `@nomos how do we rotate DB creds?
 
-↳ workflow: rotate-db-credentials
+> workflow: rotate-db-credentials
   1. drain replica traffic
   2. rotate secret in vault
   3. redeploy api + verify
@@ -19,9 +19,9 @@ const codeExamples = [
     label: "Run a workflow",
     code: `$ nomos run hotfix-payments-queue
 
-▷ flushing stuck queue......... ok
-▷ redeploying workers.......... ok
-▷ verifying throughput......... ok
+> flushing stuck queue......... ok
+> redeploying workers.......... ok
+> verifying throughput......... ok
 
 completed in 42s`,
   },
@@ -61,24 +61,19 @@ const codeAnimationStyles = `
     transform: translateX(-8px);
     animation: devLineReveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
-  
+
   @keyframes devLineReveal {
     to {
       opacity: 1;
       transform: translateX(0);
     }
   }
-  
-  .dev-code-char {
-    opacity: 0;
-    filter: blur(8px);
-    animation: devCharReveal 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-  
-  @keyframes devCharReveal {
-    to {
+
+  @media (prefers-reduced-motion: reduce) {
+    .dev-code-line {
+      animation: none;
       opacity: 1;
-      filter: blur(0);
+      transform: none;
     }
   }
 `;
@@ -108,30 +103,27 @@ export function DevelopersSection() {
   }, []);
 
   return (
-    <section id="memory-layer" ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
+    <section id="memory-layer" ref={sectionRef} className="relative py-24 border-b border-border">
       <style dangerouslySetInnerHTML={{ __html: codeAnimationStyles }} />
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      <div className="max-w-[1100px] mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left: Content */}
           <div
             className={`transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-              <span className="w-8 h-px bg-accent" />
-              The memory layer
-            </span>
-            <h2 className="text-4xl lg:text-6xl font-display tracking-tight text-balance mb-8">
+            <span className="eyebrow block mb-6">The memory layer</span>
+            <h2 className="text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance mb-8">
               Memory you can
               <br />
               <span className="text-muted-foreground">actually run.</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-12 leading-relaxed text-pretty">
+            <p className="text-base text-muted-foreground mb-12 leading-[1.7] text-pretty">
               The output isn&apos;t a document nobody rereads. It&apos;s a queryable Slack bot and
               a set of runnable workflows that future engineers and AI agents can trigger directly.
             </p>
-            
+
             {/* Features */}
             <div className="grid grid-cols-2 gap-6">
               {features.map((feature, index) => (
@@ -148,22 +140,22 @@ export function DevelopersSection() {
               ))}
             </div>
           </div>
-          
+
           {/* Right: Code block */}
           <div
             className={`lg:sticky lg:top-32 transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
           >
-            <div className="border border-foreground/10">
+            <div className="border border-border bg-card rounded-[2px]">
               {/* Tabs */}
-              <div className="flex items-center border-b border-foreground/10">
+              <div className="flex items-center border-b border-border">
                 {codeExamples.map((example, idx) => (
                   <button
                     key={example.label}
                     type="button"
                     onClick={() => setActiveTab(idx)}
-                    className={`px-6 py-4 text-sm font-mono transition-colors relative ${
+                    className={`px-6 py-4 text-[13px] font-mono transition-colors relative ${
                       activeTab === idx
                         ? "text-foreground"
                         : "text-muted-foreground hover:text-foreground"
@@ -183,47 +175,35 @@ export function DevelopersSection() {
                   aria-label="Copy code"
                 >
                   {copied ? (
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-foreground" />
                   ) : (
                     <Copy className="w-4 h-4" />
                   )}
                 </button>
               </div>
-              
+
               {/* Code content */}
-              <div className="p-8 font-mono text-sm bg-foreground/[0.01] min-h-[220px]">
+              <div className="p-6 font-mono text-[13px] min-h-[220px]">
                 <pre className="text-foreground/80">
                   {codeExamples[activeTab].code.split('\n').map((line, lineIndex) => (
-                    <div 
-                      key={`${activeTab}-${lineIndex}`} 
+                    <div
+                      key={`${activeTab}-${lineIndex}`}
                       className="leading-loose dev-code-line"
                       style={{ animationDelay: `${lineIndex * 80}ms` }}
                     >
-                      <span className="inline-flex">
-                        {line.split('').map((char, charIndex) => (
-                          <span
-                            key={`${activeTab}-${lineIndex}-${charIndex}`}
-                            className="dev-code-char"
-                            style={{
-                              animationDelay: `${lineIndex * 80 + charIndex * 15}ms`,
-                            }}
-                          >
-                            {char === ' ' ? '\u00A0' : char}
-                          </span>
-                        ))}
-                      </span>
+                      {line === '' ? ' ' : line}
                     </div>
                   ))}
                 </pre>
               </div>
             </div>
-            
+
             {/* Links */}
             <div className="mt-6 flex items-center gap-6 text-sm">
               <a href="#early-access" className="text-foreground hover:underline underline-offset-4">
                 See it on your stack
               </a>
-              <span className="text-foreground/20">|</span>
+              <span className="text-border">|</span>
               <a href="#how-it-works" className="text-muted-foreground hover:text-foreground">
                 How the loop works
               </a>

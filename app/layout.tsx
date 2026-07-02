@@ -1,26 +1,17 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const instrumentSans = Instrument_Sans({ 
+const geistSans = Geist({
   subsets: ["latin"],
-  variable: '--font-instrument',
-  preload: false,
+  variable: '--font-geist-sans',
 });
 
-const instrumentSerif = Instrument_Serif({ 
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: "400",
-  variable: '--font-instrument-serif',
-  preload: false,
-});
-
-const jetbrainsMono = JetBrains_Mono({ 
-  subsets: ["latin"],
-  variable: '--font-jetbrains',
-  preload: false,
+  variable: '--font-geist-mono',
 });
 
 export const metadata: Metadata = {
@@ -31,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport = {
-  themeColor: '#1a1c22',
+  themeColor: '#FFFFFF',
 }
 
 export default function RootLayout({
@@ -40,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark bg-background">
-      <body className={`${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+    <html lang="en" className="bg-background">
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

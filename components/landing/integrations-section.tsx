@@ -34,69 +34,39 @@ export function IntegrationsSection() {
   }, []);
 
   return (
-    <section id="integrations" ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section id="integrations" ref={sectionRef} className="relative py-24 border-b border-border">
+      <div className="max-w-[1100px] mx-auto px-6">
         {/* Header */}
         <div
-          className={`text-center max-w-3xl mx-auto mb-16 lg:mb-24 transition-all duration-700 ${
+          className={`text-center max-w-[720px] mx-auto mb-16 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-            <span className="w-8 h-px bg-accent" />
-            Ingest
-            <span className="w-8 h-px bg-accent" />
-          </span>
-          <h2 className="text-4xl lg:text-6xl font-display tracking-tight text-balance mb-6">
+          <span className="eyebrow block mb-6">Ingest</span>
+          <h2 className="text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance mb-6">
             The full operational
             <br />
             footprint. Not a summary.
           </h2>
-          <p className="text-xl text-muted-foreground text-pretty">
+          <p className="text-base text-muted-foreground leading-[1.7] text-pretty">
             Nomos reconstructs how an engineer actually worked by pulling from every system
             they touched, including the personal AI tools no exit process ever reaches.
           </p>
         </div>
 
-      </div>
-      
-      {/* Full-width marquees outside container */}
-      <div className="w-full mb-6">
-        <div className="flex gap-6 marquee">
-          {[...Array(2)].map((_, setIndex) => (
-            <div key={setIndex} className="flex gap-6 shrink-0">
-              {integrations.map((integration) => (
-                <div
-                  key={`${integration.name}-${setIndex}`}
-                  className="shrink-0 px-8 py-6 border border-foreground/10 hover:border-foreground/30 hover:bg-foreground/[0.02] transition-all duration-300 group"
-                >
-                  <div className="text-lg font-medium group-hover:translate-x-1 transition-transform">
-                    {integration.name}
-                  </div>
-                  <div className="text-sm text-muted-foreground">{integration.category}</div>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Reverse marquee */}
-      <div className="w-full">
-        <div className="flex gap-6 marquee-reverse">
-          {[...Array(2)].map((_, setIndex) => (
-            <div key={setIndex} className="flex gap-6 shrink-0">
-              {[...integrations].reverse().map((integration) => (
-                <div
-                  key={`${integration.name}-reverse-${setIndex}`}
-                  className="shrink-0 px-8 py-6 border border-foreground/10 hover:border-foreground/30 hover:bg-foreground/[0.02] transition-all duration-300 group"
-                >
-                  <div className="text-lg font-medium group-hover:translate-x-1 transition-transform">
-                    {integration.name}
-                  </div>
-                  <div className="text-sm text-muted-foreground">{integration.category}</div>
-                </div>
-              ))}
+        {/* Integration grid */}
+        <div
+          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border border border-border rounded-[2px] transition-all duration-700 delay-150 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          {integrations.map((integration) => (
+            <div
+              key={integration.name}
+              className="bg-background p-6 hover:bg-secondary transition-colors duration-300"
+            >
+              <div className="text-[15px] font-medium text-foreground">{integration.name}</div>
+              <div className="text-[13px] text-faint mt-1">{integration.category}</div>
             </div>
           ))}
         </div>

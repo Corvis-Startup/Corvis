@@ -21,33 +21,26 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section
-      id="early-access"
-      className="relative py-32 lg:py-40 border-t border-foreground/10"
-    >
-      <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+    <section id="early-access" className="relative py-24 border-b border-border">
+      <div className="max-w-[720px] mx-auto px-6 text-center">
         {/* Label */}
-        <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-8">
-          <span className="w-8 h-px bg-accent" />
-          Early access
-          <span className="w-8 h-px bg-accent" />
-        </span>
+        <span className="eyebrow block mb-8">Early access</span>
 
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight text-balance mb-6">
+        <h2 className="text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance mb-6">
           We&apos;re building Nomos with a
           <br />
           small group of design partners.
         </h2>
 
-        <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-12 text-pretty">
+        <p className="text-base text-muted-foreground leading-[1.7] max-w-xl mx-auto mb-12 text-pretty">
           Nomos is pre-launch. If your team is losing hard-won engineering knowledge to
           turnover, request access and help shape how the memory layer works.
         </p>
 
         {/* Form */}
         {submitted ? (
-          <div className="max-w-md mx-auto flex items-center justify-center gap-3 border border-verified/40 bg-verified/10 px-6 py-5 rounded-full">
-            <Check className="w-5 h-5 text-verified shrink-0" />
+          <div className="max-w-md mx-auto flex items-center justify-center gap-3 border border-border bg-card px-6 py-4 rounded-[2px]">
+            <Check className="w-5 h-5 text-foreground shrink-0" />
             <span className="text-foreground">
               You&apos;re on the list. We&apos;ll be in touch about a demo.
             </span>
@@ -67,12 +60,12 @@ export function TestimonialsSection() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@company.com"
-              className="flex-1 h-14 px-6 rounded-full bg-card border border-foreground/15 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
+              className="flex-1 h-12 px-4 rounded-[2px] bg-background border border-border text-foreground placeholder:text-faint focus:outline-none focus:border-foreground transition-colors"
             />
             <Button
               type="submit"
               size="lg"
-              className="bg-foreground hover:bg-foreground/90 text-background h-14 px-8 text-base rounded-full group shrink-0"
+              className="h-12 px-6 text-base rounded-[2px] group shrink-0"
             >
               Request access
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
@@ -81,10 +74,10 @@ export function TestimonialsSection() {
         )}
 
         {/* Principles */}
-        <div className="mt-16 pt-12 border-t border-foreground/10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+        <div className="mt-16 pt-12 border-t border-border flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
           {principles.map((principle) => (
             <span key={principle} className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              <span className="w-1.5 h-1.5 rounded-full bg-foreground/30" />
               {principle}
             </span>
           ))}

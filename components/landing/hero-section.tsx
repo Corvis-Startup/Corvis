@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { AnimatedSphere } from "./animated-sphere";
 
 const words = ["Claude Code", "Cursor", "Slack fixes", "tribal knowledge"];
 
@@ -23,55 +22,21 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-      {/* Animated sphere background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] lg:w-[800px] lg:h-[800px] opacity-40 pointer-events-none">
-        <AnimatedSphere />
-      </div>
-      
-      {/* Subtle grid lines */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={`h-${i}`}
-            className="absolute h-px bg-foreground/10"
-            style={{
-              top: `${12.5 * (i + 1)}%`,
-              left: 0,
-              right: 0,
-            }}
-          />
-        ))}
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={`v-${i}`}
-            className="absolute w-px bg-foreground/10"
-            style={{
-              left: `${8.33 * (i + 1)}%`,
-              top: 0,
-              bottom: 0,
-            }}
-          />
-        ))}
-      </div>
-      
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 py-32 lg:py-40">
+    <section className="relative border-b border-border">
+      <div className="max-w-[1100px] mx-auto px-6 pt-40 pb-24">
         {/* Eyebrow */}
-        <div 
+        <div
           className={`mb-8 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground">
-            <span className="w-8 h-px bg-accent" />
-            Executable company memory
-          </span>
+          <span className="eyebrow">Executable company memory</span>
         </div>
-        
+
         {/* Main headline */}
         <div className="mb-12">
-          <h1 
-            className={`text-[clamp(2.5rem,9vw,8rem)] font-display leading-[0.9] tracking-tight transition-all duration-1000 ${
+          <h1
+            className={`text-[clamp(3rem,5vw+1rem,4.5rem)] font-semibold tracking-[-0.02em] leading-[1.05] transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -80,10 +45,7 @@ export function HeroSection() {
             <span className="block">
               their{" "}
               <span className="relative inline-block">
-                <span 
-                  key={wordIndex}
-                  className="inline-flex"
-                >
+                <span key={wordIndex} className="inline-flex">
                   {words[wordIndex].split("").map((char, i) => (
                     <span
                       key={`${wordIndex}-${i}`}
@@ -92,20 +54,20 @@ export function HeroSection() {
                         animationDelay: `${i * 50}ms`,
                       }}
                     >
-                      {char === " " ? "\u00A0" : char}
+                      {char === " " ? " " : char}
                     </span>
                   ))}
                 </span>
-                <span className="absolute -bottom-2 left-0 right-0 h-3 bg-accent/25" />
+                <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-foreground" />
               </span>
             </span>
           </h1>
         </div>
-        
+
         {/* Description */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
-          <p 
-            className={`text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-xl transition-all duration-700 delay-200 ${
+          <p
+            className={`text-lg text-muted-foreground leading-[1.7] max-w-[720px] transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -113,66 +75,39 @@ export function HeroSection() {
             that never surface in an exit interview. Nomos backtests their real workflows
             in a sandbox, verifies what actually works, and keeps the proven parts runnable.
           </p>
-          
+
           {/* CTAs */}
-          <div 
+          <div
             className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <Button 
-              size="lg" 
-              className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
-              asChild
-            >
+            <Button size="lg" className="px-8 h-12 text-base rounded-[2px] group" asChild>
               <a href="#early-access">
                 Book a demo
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="h-14 px-8 text-base rounded-full border-foreground/20 hover:bg-foreground/5 bg-transparent"
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 px-8 text-base rounded-[2px]"
               asChild
             >
               <a href="#how-it-works">See how it works</a>
             </Button>
           </div>
         </div>
-        
+
+        {/* What walks out the door */}
+        <p
+          className={`eyebrow mt-20 transition-all duration-700 delay-500 ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          Claude Code · Cursor · Slack threads · prompt libraries — none of it survives offboarding
+        </p>
       </div>
-      
-      {/* Stats marquee - full width outside container */}
-      <div 
-        className={`absolute bottom-8 left-0 right-0 transition-all duration-700 delay-500 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="flex gap-16 marquee whitespace-nowrap">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-16">
-              {[
-                { value: "Claude Code", label: "months of corrections", tag: "PERSONAL AI" },
-                { value: "Cursor", label: "agentic workflows", tag: "PERSONAL AI" },
-                { value: "Slack", label: "tribal fixes buried in threads", tag: "COMMS" },
-                { value: "Prompt libs", label: "never handed off", tag: "GONE ON DEACTIVATION" },
-              ].map((stat) => (
-                <div key={`${stat.tag}-${stat.value}-${i}`} className="flex items-baseline gap-4">
-                  <span className="text-4xl lg:text-5xl font-display">{stat.value}</span>
-                  <span className="text-sm text-muted-foreground">
-                    {stat.label}
-                    <span className="block font-mono text-xs mt-1 text-accent">{stat.tag}</span>
-                  </span>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Scroll indicator */}
-      
     </section>
   );
 }

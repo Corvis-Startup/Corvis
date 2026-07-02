@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { X, Check } from "lucide-react";
 
 const rows = [
   {
@@ -42,66 +41,61 @@ export function InfrastructureSection() {
   }, []);
 
   return (
-    <section id="differentiator" ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section id="differentiator" ref={sectionRef} className="relative py-24 border-b border-border">
+      <div className="max-w-[1100px] mx-auto px-6">
         {/* Header */}
         <div
-          className={`max-w-3xl mb-16 lg:mb-24 transition-all duration-700 ${
+          className={`max-w-[720px] mb-16 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-            <span className="w-8 h-px bg-accent" />
-            Why Nomos
-          </span>
-          <h2 className="text-4xl lg:text-6xl font-display tracking-tight text-balance mb-6">
+          <span className="eyebrow block mb-6">Why Nomos</span>
+          <h2 className="text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance mb-6">
             Open loop vs.
             <br />
             closed loop.
           </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
+          <p className="text-base text-muted-foreground leading-[1.7]">
             Everyone else captures a claim and stores it as text. Nomos reruns the real
             workflow, proves what holds, and keeps it executable.
           </p>
         </div>
 
         {/* Comparison */}
-        <div className="grid md:grid-cols-2 gap-px bg-foreground/10 border border-foreground/10">
+        <div className="grid md:grid-cols-2 gap-px bg-border border border-border rounded-[2px]">
           {/* Open loop column */}
           <div className="bg-background">
-            <div className="flex items-center justify-between gap-4 px-6 lg:px-8 py-6 border-b border-foreground/10">
+            <div className="flex items-center justify-between gap-4 px-6 lg:px-8 py-6 border-b border-border">
               <div>
-                <div className="font-mono text-xs uppercase tracking-widest text-gap mb-1">Open loop</div>
-                <div className="font-display text-xl">Exit interviews &amp; knowledge bases</div>
+                <div className="eyebrow mb-1">Open loop</div>
+                <div className="text-xl font-semibold tracking-[-0.02em]">Exit interviews &amp; knowledge bases</div>
               </div>
             </div>
             <ul>
               {rows.map((row, i) => (
                 <li
                   key={row.open}
-                  className={`flex items-start gap-4 px-6 lg:px-8 py-5 border-b border-foreground/5 last:border-b-0 transition-all duration-500 ${
+                  className={`flex items-start gap-4 px-6 lg:px-8 py-5 border-b border-border last:border-b-0 transition-all duration-500 ${
                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
                   }`}
                   style={{ transitionDelay: `${i * 60}ms` }}
                 >
-                  <span className="mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center rounded-full border border-gap/40 text-gap">
-                    <X className="w-3 h-3" />
-                  </span>
-                  <span className="text-muted-foreground">{row.open}</span>
+                  <span className="mt-1 shrink-0 w-8 font-mono text-[11px] text-faint whitespace-nowrap">[x]</span>
+                  <span className="text-faint">{row.open}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Closed loop column */}
-          <div className="bg-card/50 relative">
-            <div className="absolute inset-x-0 top-0 h-px bg-accent" />
-            <div className="flex items-center justify-between gap-4 px-6 lg:px-8 py-6 border-b border-foreground/10">
+          <div className="bg-card relative">
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-foreground" />
+            <div className="flex items-center justify-between gap-4 px-6 lg:px-8 py-6 border-b border-border">
               <div>
-                <div className="font-mono text-xs uppercase tracking-widest text-verified mb-1">Closed loop</div>
-                <div className="font-display text-xl">Nomos</div>
+                <div className="eyebrow mb-1">Closed loop</div>
+                <div className="text-xl font-semibold tracking-[-0.02em]">Nomos</div>
               </div>
-              <span className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 border border-verified/40 text-verified rounded-full">
+              <span className="text-[10px] font-medium uppercase tracking-[0.12em] px-2 py-0.5 border border-border bg-secondary text-foreground rounded-full">
                 Verified
               </span>
             </div>
@@ -109,15 +103,13 @@ export function InfrastructureSection() {
               {rows.map((row, i) => (
                 <li
                   key={row.closed}
-                  className={`flex items-start gap-4 px-6 lg:px-8 py-5 border-b border-foreground/5 last:border-b-0 transition-all duration-500 ${
+                  className={`flex items-start gap-4 px-6 lg:px-8 py-5 border-b border-border last:border-b-0 transition-all duration-500 ${
                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
                   }`}
                   style={{ transitionDelay: `${i * 60 + 120}ms` }}
                 >
-                  <span className="mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-verified/15 text-verified">
-                    <Check className="w-3 h-3" />
-                  </span>
-                  <span className="text-foreground">{row.closed}</span>
+                  <span className="mt-1 shrink-0 w-8 font-mono text-[11px] font-semibold text-foreground whitespace-nowrap">[ok]</span>
+                  <span className="text-foreground font-medium">{row.closed}</span>
                 </li>
               ))}
             </ul>
