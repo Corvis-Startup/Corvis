@@ -6,18 +6,21 @@ import './globals.css'
 
 const instrumentSans = Instrument_Sans({ 
   subsets: ["latin"],
-  variable: '--font-instrument'
+  variable: '--font-instrument',
+  preload: false,
 });
 
 const instrumentSerif = Instrument_Serif({ 
   subsets: ["latin"],
   weight: "400",
-  variable: '--font-instrument-serif'
+  variable: '--font-instrument-serif',
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({ 
   subsets: ["latin"],
-  variable: '--font-jetbrains'
+  variable: '--font-jetbrains',
+  preload: false,
 });
 
 export const metadata: Metadata = {
