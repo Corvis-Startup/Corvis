@@ -83,32 +83,36 @@ function ProblemCard({ problem, index }: { problem: (typeof problems)[0]; index:
     return () => observer.disconnect();
   }, []);
 
-  const accentColor = problem.visual === "verify" ? "text-verified" : "text-gap";
-
   return (
     <div
       ref={cardRef}
-      className={`group relative flex flex-col border border-foreground/10 bg-card/40 p-8 lg:p-10 transition-all duration-700 hover:border-foreground/20 ${
+      className={`relative flex flex-col border border-border bg-card p-8 rounded-[2px] transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}
       style={{ transitionDelay: `${index * 120}ms` }}
     >
       <div className="flex items-center justify-between mb-8">
-        <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{problem.tag}</span>
-        <span className={`font-mono text-xs ${accentColor}`}>{problem.status}</span>
+        <span className="eyebrow">{problem.tag}</span>
+        <span
+          className={`font-mono text-[11px] ${
+            problem.visual === "verify" ? "text-foreground font-medium" : "text-faint"
+          }`}
+        >
+          {problem.status}
+        </span>
       </div>
 
-      <div className={`w-40 h-28 mb-8 ${accentColor}`}>
+      <div className="w-40 h-28 mb-8 text-foreground/50">
         <ProblemVisual type={problem.visual} />
       </div>
 
-      <h3 className="text-2xl lg:text-3xl font-display leading-tight mb-4 text-balance">{problem.title}</h3>
+      <h3 className="text-2xl font-semibold tracking-[-0.02em] leading-tight mb-4 text-balance">{problem.title}</h3>
       <p className="text-muted-foreground leading-relaxed mb-8">{problem.description}</p>
 
-      <ul className="mt-auto space-y-3 border-t border-foreground/10 pt-6">
+      <ul className="mt-auto space-y-3 border-t border-border pt-6">
         {problem.points.map((point) => (
           <li key={point} className="flex items-start gap-3 text-sm text-foreground/80">
-            <span className={`mt-1.5 w-1.5 h-1.5 shrink-0 rounded-full ${problem.visual === "verify" ? "bg-verified" : "bg-gap"}`} />
+            <span className="mt-2 w-1.5 h-1.5 shrink-0 bg-foreground" />
             {point}
           </li>
         ))}
@@ -133,15 +137,12 @@ export function FeaturesSection() {
   }, []);
 
   return (
-    <section id="problem" ref={sectionRef} className="relative py-24 lg:py-32">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="mb-16 lg:mb-24 max-w-3xl">
-          <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-            <span className="w-8 h-px bg-accent" />
-            The problem
-          </span>
+    <section id="problem" ref={sectionRef} className="relative py-24 border-b border-border">
+      <div className="max-w-[1100px] mx-auto px-6">
+        <div className="mb-16 max-w-[720px]">
+          <span className="eyebrow block mb-6">The problem</span>
           <h2
-            className={`text-4xl lg:text-6xl font-display tracking-tight text-balance transition-all duration-700 ${
+            className={`text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -151,7 +152,7 @@ export function FeaturesSection() {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid lg:grid-cols-2 gap-6">
           {problems.map((problem, index) => (
             <ProblemCard key={problem.tag} problem={problem} index={index} />
           ))}

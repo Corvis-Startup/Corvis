@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { name: "The problem", href: "#problem" },
   { name: "How it works", href: "#how-it-works" },
-  { name: "Why Nomos", href: "#differentiator" },
+  { name: "Why Corvis", href: "#differentiator" },
   { name: "Memory layer", href: "#memory-layer" },
 ];
 
@@ -24,55 +24,41 @@ export function Navigation() {
   }, []);
 
   return (
-    <header
-      className={`fixed z-50 transition-all duration-500 ${
-        isScrolled 
-          ? "top-4 left-4 right-4" 
-          : "top-0 left-0 right-0"
-      }`}
-    >
-      <nav 
-        className={`mx-auto transition-all duration-500 ${
-          isScrolled || isMobileMenuOpen
-            ? "bg-background/80 backdrop-blur-xl border border-foreground/10 rounded-2xl shadow-lg max-w-[1200px]"
-            : "bg-transparent max-w-[1400px]"
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <nav
+        className={`bg-background border-b transition-colors duration-300 ${
+          isScrolled || isMobileMenuOpen ? "border-border" : "border-transparent"
         }`}
       >
-        <div 
-          className={`flex items-center justify-between transition-all duration-500 px-6 lg:px-8 ${
-            isScrolled ? "h-14" : "h-20"
-          }`}
-        >
+        <div className="relative max-w-[1100px] mx-auto flex items-center justify-between h-16 px-6">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <span className={`font-display tracking-tight transition-all duration-500 ${isScrolled ? "text-xl" : "text-2xl"}`}>Nomos</span>
-            <span className={`text-muted-foreground font-mono transition-all duration-500 ${isScrolled ? "text-[10px] mt-0.5" : "text-xs mt-1"}`}>memory layer</span>
+          <a href="#" className="flex items-center gap-2">
+            <span className="text-lg font-semibold tracking-[-0.02em]">Corvis</span>
+            <span className="text-[11px] text-faint mt-0.5">memory layer</span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-12">
+          <div className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 relative group"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="#early-access" className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${isScrolled ? "text-xs" : "text-sm"}`}>
+            <a
+              href="#early-access"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
               Request access
             </a>
-            <Button
-              size="sm"
-              className={`bg-foreground hover:bg-foreground/90 text-background rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
-              asChild
-            >
+            <Button size="sm" className="rounded-[2px] h-9 px-4" asChild>
               <a href="#early-access">Book a demo</a>
             </Button>
           </div>
@@ -90,14 +76,13 @@ export function Navigation() {
             )}
           </button>
         </div>
-
       </nav>
-      
+
       {/* Mobile Menu - Full Screen Overlay */}
       <div
         className={`md:hidden fixed inset-0 bg-background z-40 transition-all duration-500 ${
-          isMobileMenuOpen 
-            ? "opacity-100 pointer-events-auto" 
+          isMobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
         style={{ top: 0 }}
@@ -110,9 +95,9 @@ export function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-5xl font-display text-foreground hover:text-muted-foreground transition-all duration-500 ${
-                  isMobileMenuOpen 
-                    ? "opacity-100 translate-y-0" 
+                className={`text-4xl font-semibold tracking-[-0.02em] text-foreground hover:text-muted-foreground transition-all duration-500 ${
+                  isMobileMenuOpen
+                    ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-4"
                 }`}
                 style={{ transitionDelay: isMobileMenuOpen ? `${i * 75}ms` : "0ms" }}
@@ -121,25 +106,26 @@ export function Navigation() {
               </a>
             ))}
           </div>
-          
+
           {/* Bottom CTAs */}
-          <div className={`flex gap-4 pt-8 border-t border-foreground/10 transition-all duration-500 ${
-            isMobileMenuOpen 
-              ? "opacity-100 translate-y-0" 
-              : "opacity-0 translate-y-4"
-          }`}
-          style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
+          <div
+            className={`flex gap-4 pt-8 border-t border-border transition-all duration-500 ${
+              isMobileMenuOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
-            <Button 
-              variant="outline" 
-              className="flex-1 rounded-full h-14 text-base"
+            <Button
+              variant="outline"
+              className="flex-1 rounded-[2px] h-12 text-base"
               onClick={() => setIsMobileMenuOpen(false)}
               asChild
             >
               <a href="#early-access">Request access</a>
             </Button>
-            <Button 
-              className="flex-1 bg-foreground text-background rounded-full h-14 text-base"
+            <Button
+              className="flex-1 rounded-[2px] h-12 text-base"
               onClick={() => setIsMobileMenuOpen(false)}
               asChild
             >

@@ -7,17 +7,15 @@ const steps = [
     number: "01",
     title: "Ingest",
     description:
-      "Nomos pulls the departing engineer's full operational footprint across GitHub, Slack, Linear/Jira, CI/CD, and their personal AI tool history.",
+      "Corvis pulls the departing engineer's full operational footprint across GitHub, Slack, Linear/Jira, CI/CD, and their personal AI tool history.",
     file: "ingest.log",
-    code: `$ nomos ingest --engineer @dana
-
-→ github        1,204 commits, 88 PRs
-→ slack         3,410 threads
-→ linear        212 issues resolved
-→ ci/cd         churn + deploy history
-→ ai history    claude code, cursor, chatgpt
-
-footprint assembled ✓`,
+    code: `$ corvis ingest --engineer dana@company.com
+> github     1,204 commits, 88 PRs
+> slack      3,410 threads
+> linear     212 issues resolved
+> ci/cd      churn + deploy history
+> ai history claude code, cursor, chatgpt
+> [OK] footprint assembled. 847 artifacts`,
   },
   {
     number: "02",
@@ -25,15 +23,15 @@ footprint assembled ✓`,
     description:
       "It reruns their critical workflows in an isolated sandbox. Whatever breaks is a proven, evidenced knowledge gap, not a guess.",
     file: "backtest.log",
-    code: `$ nomos backtest --sandbox
-
-▷ deploy-staging.workflow      passed ✓
-▷ rotate-db-credentials         passed ✓
-▷ hotfix-payments-queue         FAILED ✗
-  └─ missing step: manual flush
-▷ restore-from-snapshot         FAILED ✗
-
-2 evidenced gaps found`,
+    code: `$ corvis backtest --engineer dana@company.com
+> ingesting footprint... 847 artifacts
+> replaying 23 critical workflows
+> [OK]   deploy-staging.workflow
+> [OK]   rotate-db-credentials
+> [FAIL] hotfix-payments-queue — missing step: manual flush
+> [FAIL] restore-from-snapshot — replica skip undocumented
+> gap report ready. 2 verified gaps found.
+launching targeted interview...`,
   },
   {
     number: "03",
@@ -41,17 +39,14 @@ footprint assembled ✓`,
     description:
       "A targeted AI interview covers only the verified gaps and the judgment calls a backtest can't capture. The why, not the what.",
     file: "interview.log",
-    code: `$ nomos interview --gaps-only
-
-? hotfix-payments-queue
+    code: `$ corvis interview --gaps-only
+> hotfix-payments-queue
   "Why flush before redeploying?"
-  → captured: race condition context
-
-? restore-from-snapshot
+> [OK] captured: race condition context
+> restore-from-snapshot
   "When do you skip the replica?"
-  → captured: judgment call
-
-gaps resolved ✓`,
+> [OK] captured: judgment call
+> gaps resolved. 2 of 2`,
   },
   {
     number: "04",
@@ -59,13 +54,11 @@ gaps resolved ✓`,
     description:
       "The output is an executable memory layer: a queryable Slack bot plus runnable workflows future engineers and AI agents can trigger directly.",
     file: "store.log",
-    code: `$ nomos publish
-
-→ slack bot        /ask-nomos ready
-→ workflows        5 runnable, versioned
-→ agents           MCP endpoint live
-
-memory layer is executable ✓`,
+    code: `$ corvis publish
+> slack bot   /ask-corvis ready
+> workflows   5 runnable, versioned
+> agents      MCP endpoint live
+> [OK] memory layer is executable`,
   },
 ];
 
@@ -96,33 +89,14 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 border-y border-foreground/10 overflow-hidden"
+      className="relative py-24 border-b border-border bg-card"
     >
-      {/* Diagonal lines pattern */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 40px,
-            currentColor 40px,
-            currentColor 41px
-          )`,
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="max-w-[1100px] mx-auto px-6">
         {/* Header */}
-        <div className="mb-16 lg:mb-24">
-          <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-            <span className="w-8 h-px bg-accent" />
-            How it works
-          </span>
+        <div className="mb-16">
+          <span className="eyebrow block mb-6">How it works</span>
           <h2
-            className={`text-4xl lg:text-6xl font-display tracking-tight text-balance transition-all duration-700 ${
+            className={`text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -133,7 +107,7 @@ export function HowItWorksSection() {
         </div>
 
         {/* Main content */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Steps */}
           <div className="space-y-0">
             {steps.map((step, index) => (
@@ -141,29 +115,29 @@ export function HowItWorksSection() {
                 key={step.number}
                 type="button"
                 onClick={() => setActiveStep(index)}
-                className={`w-full text-left py-8 border-b border-foreground/10 transition-all duration-500 group ${
+                className={`w-full text-left py-8 border-b border-border transition-all duration-500 ${
                   activeStep === index ? "opacity-100" : "opacity-40 hover:opacity-70"
                 }`}
               >
                 <div className="flex items-start gap-6">
                   <span
-                    className={`font-mono text-sm mt-1 transition-colors ${
-                      activeStep === index ? "text-accent" : "text-foreground/30"
+                    className={`font-mono text-xs mt-1.5 transition-colors ${
+                      activeStep === index ? "text-foreground" : "text-faint"
                     }`}
                   >
                     {step.number}
                   </span>
                   <div className="flex-1">
-                    <h3 className="text-2xl lg:text-3xl font-display mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                    <h3 className="text-xl font-semibold tracking-[-0.02em] mb-3">
                       {step.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">{step.description}</p>
 
                     {/* Progress indicator */}
                     {activeStep === index && (
-                      <div className="mt-4 h-px bg-foreground/10 overflow-hidden">
+                      <div className="mt-4 h-px bg-border overflow-hidden">
                         <div
-                          className="h-full bg-accent w-0"
+                          className="h-full bg-foreground w-0"
                           style={{ animation: "progress 5s linear forwards" }}
                         />
                       </div>
@@ -174,40 +148,40 @@ export function HowItWorksSection() {
             ))}
           </div>
 
-          {/* Terminal display */}
+          {/* Terminal display — the one dark element on the page */}
           <div className="lg:sticky lg:top-32 self-start">
-            <div className="border border-foreground/10 bg-card/60 overflow-hidden rounded-sm">
+            <div className="bg-[#111111] text-white overflow-hidden rounded-[2px]">
               {/* Window header */}
-              <div className="px-6 py-4 border-b border-foreground/10 flex items-center justify-between">
+              <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
                 <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-foreground/20" />
-                  <div className="w-3 h-3 rounded-full bg-foreground/20" />
-                  <div className="w-3 h-3 rounded-full bg-foreground/20" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
                 </div>
-                <span className="text-xs font-mono text-muted-foreground">{steps[activeStep].file}</span>
+                <span className="font-mono text-[11px] text-white/40">{steps[activeStep].file}</span>
               </div>
 
               {/* Code content */}
               <div className="p-6 lg:p-8 font-mono text-sm min-h-[300px]">
                 <pre className="whitespace-pre-wrap">
                   {steps[activeStep].code.split("\n").map((line, lineIndex) => {
-                    const isPass = line.includes("✓") || line.includes("passed");
-                    const isFail = line.includes("✗") || line.includes("FAILED");
+                    const isFail = line.includes("[FAIL]");
+                    const isPass = line.includes("[OK]");
                     const isCmd = line.startsWith("$");
                     const color = isFail
-                      ? "text-gap"
-                      : isPass
-                        ? "text-verified"
-                        : isCmd
-                          ? "text-foreground"
-                          : "text-muted-foreground";
+                      ? "text-white font-semibold"
+                      : isCmd
+                        ? "text-white"
+                        : isPass
+                          ? "text-white/70"
+                          : "text-white/50";
                     return (
                       <div
                         key={`${activeStep}-${lineIndex}`}
                         className={`leading-loose code-line-reveal ${color}`}
                         style={{ animationDelay: `${lineIndex * 70}ms` }}
                       >
-                        {line === "" ? "\u00A0" : line}
+                        {line === "" ? " " : line}
                       </div>
                     );
                   })}
@@ -215,9 +189,9 @@ export function HowItWorksSection() {
               </div>
 
               {/* Status */}
-              <div className="px-6 py-4 border-t border-foreground/10 flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                <span className="text-xs font-mono text-muted-foreground">
+              <div className="px-6 py-4 border-t border-white/10 flex items-center gap-3">
+                <span className="w-2 h-2 rounded-full bg-white/40" />
+                <span className="font-mono text-[11px] text-white/40">
                   step {steps[activeStep].number} / 04
                 </span>
               </div>
