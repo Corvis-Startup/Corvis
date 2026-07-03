@@ -6,7 +6,7 @@ const footerLinks = {
   Product: [
     { name: "The problem", href: "#problem" },
     { name: "How it works", href: "#how-it-works" },
-    { name: "Why Nomos", href: "#differentiator" },
+    { name: "Why Corvis", href: "#differentiator" },
     { name: "Memory layer", href: "#memory-layer" },
   ],
   Platform: [
@@ -43,7 +43,7 @@ export function FooterSection() {
             {/* Brand Column */}
             <div className="col-span-2">
               <a href="#" className="inline-flex items-center gap-2 mb-6">
-                <span className="text-lg font-semibold tracking-[-0.02em]">Nomos</span>
+                <span className="text-lg font-semibold tracking-[-0.02em]">Corvis</span>
                 <span className="text-[11px] text-faint">memory layer</span>
               </a>
 
@@ -96,7 +96,7 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="py-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 Nomos. All rights reserved.
+            © 2026 Corvis. All rights reserved.
           </p>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">

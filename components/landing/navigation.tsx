@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { name: "The problem", href: "#problem" },
   { name: "How it works", href: "#how-it-works" },
-  { name: "Why Nomos", href: "#differentiator" },
+  { name: "Why Corvis", href: "#differentiator" },
   { name: "Memory layer", href: "#memory-layer" },
 ];
 
@@ -33,7 +33,7 @@ export function Navigation() {
         <div className="relative max-w-[1100px] mx-auto flex items-center justify-between h-16 px-6">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
-            <span className="text-lg font-semibold tracking-[-0.02em]">Nomos</span>
+            <span className="text-lg font-semibold tracking-[-0.02em]">Corvis</span>
             <span className="text-[11px] text-faint mt-0.5">memory layer</span>
           </a>
 

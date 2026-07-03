@@ -72,7 +72,7 @@ export function HeroSection() {
             }`}
           >
             Their work now lives inside personal AI tools, Slack threads, and tribal fixes
-            that never surface in an exit interview. Nomos backtests their real workflows
+            that never surface in an exit interview. Corvis backtests their real workflows
             in a sandbox, verifies what actually works, and keeps the proven parts runnable.
           </p>
 

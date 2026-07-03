@@ -6,7 +6,7 @@ import { Copy, Check } from "lucide-react";
 const codeExamples = [
   {
     label: "Ask in Slack",
-    code: `@nomos how do we rotate DB creds?
+    code: `@corvis how do we rotate DB creds?
 
 > workflow: rotate-db-credentials
   1. drain replica traffic
@@ -17,7 +17,7 @@ const codeExamples = [
   },
   {
     label: "Run a workflow",
-    code: `$ nomos run hotfix-payments-queue
+    code: `$ corvis run hotfix-payments-queue
 
 > flushing stuck queue......... ok
 > redeploying workers.......... ok
@@ -27,7 +27,7 @@ completed in 42s`,
   },
   {
     label: "Trigger from an agent",
-    code: `await nomos.workflows.run(
+    code: `await corvis.workflows.run(
   'restore-from-snapshot',
   { env: 'staging' }
 )

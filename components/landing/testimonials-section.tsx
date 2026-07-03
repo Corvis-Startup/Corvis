@@ -27,13 +27,13 @@ export function TestimonialsSection() {
         <span className="eyebrow block mb-8">Early access</span>
 
         <h2 className="text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance mb-6">
-          We&apos;re building Nomos with a
+          We&apos;re building Corvis with a
           <br />
           small group of design partners.
         </h2>
 
         <p className="text-base text-muted-foreground leading-[1.7] max-w-xl mx-auto mb-12 text-pretty">
-          Nomos is pre-launch. If your team is losing hard-won engineering knowledge to
+          Corvis is pre-launch. If your team is losing hard-won engineering knowledge to
           turnover, request access and help shape how the memory layer works.
         </p>
 

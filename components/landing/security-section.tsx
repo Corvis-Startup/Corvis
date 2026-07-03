@@ -6,17 +6,17 @@ const useCases = [
   {
     title: "High turnover risk",
     description:
-      "When a staff or senior engineer gives notice, the countdown starts. Nomos captures what they built before the account goes dark.",
+      "When a staff or senior engineer gives notice, the countdown starts. Corvis captures what they built before the account goes dark.",
   },
   {
     title: "Complex tribal infrastructure",
     description:
-      "The undocumented incident playbooks, the manual steps, the why behind the workaround. Nomos proves which ones still work.",
+      "The undocumented incident playbooks, the manual steps, the why behind the workaround. Corvis proves which ones still work.",
   },
   {
     title: "Heavy personal-AI reliance",
     description:
-      "Teams living in Claude Code, Cursor, and ChatGPT accumulate real leverage that lives nowhere shared. Nomos makes it inheritable.",
+      "Teams living in Claude Code, Cursor, and ChatGPT accumulate real leverage that lives nowhere shared. Corvis makes it inheritable.",
   },
 ];
 
@@ -54,7 +54,7 @@ export function SecuritySection() {
               with the most to lose.
             </h2>
             <p className="text-base text-muted-foreground leading-[1.7] mb-12 text-pretty">
-              Nomos is for engineering leaders and VPs of Engineering who feel the risk
+              Corvis is for engineering leaders and VPs of Engineering who feel the risk
               every time a key engineer resigns. It matters most where knowledge is tribal,
               infrastructure is complex, and the real work happens inside personal AI tools.
             </p>

@@ -7,9 +7,9 @@ const steps = [
     number: "01",
     title: "Ingest",
     description:
-      "Nomos pulls the departing engineer's full operational footprint across GitHub, Slack, Linear/Jira, CI/CD, and their personal AI tool history.",
+      "Corvis pulls the departing engineer's full operational footprint across GitHub, Slack, Linear/Jira, CI/CD, and their personal AI tool history.",
     file: "ingest.log",
-    code: `$ nomos ingest --engineer dana@company.com
+    code: `$ corvis ingest --engineer dana@company.com
 > github     1,204 commits, 88 PRs
 > slack      3,410 threads
 > linear     212 issues resolved
@@ -23,7 +23,7 @@ const steps = [
     description:
       "It reruns their critical workflows in an isolated sandbox. Whatever breaks is a proven, evidenced knowledge gap, not a guess.",
     file: "backtest.log",
-    code: `$ nomos backtest --engineer dana@company.com
+    code: `$ corvis backtest --engineer dana@company.com
 > ingesting footprint... 847 artifacts
 > replaying 23 critical workflows
 > [OK]   deploy-staging.workflow
@@ -39,7 +39,7 @@ launching targeted interview...`,
     description:
       "A targeted AI interview covers only the verified gaps and the judgment calls a backtest can't capture. The why, not the what.",
     file: "interview.log",
-    code: `$ nomos interview --gaps-only
+    code: `$ corvis interview --gaps-only
 > hotfix-payments-queue
   "Why flush before redeploying?"
 > [OK] captured: race condition context
@@ -54,8 +54,8 @@ launching targeted interview...`,
     description:
       "The output is an executable memory layer: a queryable Slack bot plus runnable workflows future engineers and AI agents can trigger directly.",
     file: "store.log",
-    code: `$ nomos publish
-> slack bot   /ask-nomos ready
+    code: `$ corvis publish
+> slack bot   /ask-corvis ready
 > workflows   5 runnable, versioned
 > agents      MCP endpoint live
 > [OK] memory layer is executable`,

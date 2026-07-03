@@ -49,14 +49,14 @@ export function InfrastructureSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <span className="eyebrow block mb-6">Why Nomos</span>
+          <span className="eyebrow block mb-6">Why Corvis</span>
           <h2 className="text-[2rem] lg:text-[2.5rem] font-semibold tracking-[-0.02em] leading-[1.15] text-balance mb-6">
             Open loop vs.
             <br />
             closed loop.
           </h2>
           <p className="text-base text-muted-foreground leading-[1.7]">
-            Everyone else captures a claim and stores it as text. Nomos reruns the real
+            Everyone else captures a claim and stores it as text. Corvis reruns the real
             workflow, proves what holds, and keeps it executable.
           </p>
         </div>
@@ -93,7 +93,7 @@ export function InfrastructureSection() {
             <div className="flex items-center justify-between gap-4 px-6 lg:px-8 py-6 border-b border-border">
               <div>
                 <div className="eyebrow mb-1">Closed loop</div>
-                <div className="text-xl font-semibold tracking-[-0.02em]">Nomos</div>
+                <div className="text-xl font-semibold tracking-[-0.02em]">Corvis</div>
               </div>
               <span className="text-[10px] font-medium uppercase tracking-[0.12em] px-2 py-0.5 border border-border bg-secondary text-foreground rounded-full">
                 Verified

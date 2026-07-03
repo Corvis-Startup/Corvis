@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Nomos - Turn engineering offboarding into executable company memory',
+  title: 'Corvis - Turn engineering offboarding into executable company memory',
   description:
-    'Nomos backtests a departing engineer\'s real workflows, not just their claims, and turns the proven parts into a runnable memory layer your team keeps.',
+    'Corvis backtests a departing engineer\'s real workflows, not just their claims, and turns the proven parts into a runnable memory layer your team keeps.',
   generator: 'v0.app',
 }
 

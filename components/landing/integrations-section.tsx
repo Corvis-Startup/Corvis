@@ -49,7 +49,7 @@ export function IntegrationsSection() {
             footprint. Not a summary.
           </h2>
           <p className="text-base text-muted-foreground leading-[1.7] text-pretty">
-            Nomos reconstructs how an engineer actually worked by pulling from every system
+            Corvis reconstructs how an engineer actually worked by pulling from every system
             they touched, including the personal AI tools no exit process ever reaches.
           </p>
         </div>
