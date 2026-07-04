@@ -8,12 +8,12 @@ const words = [
   "prompt libraries",
   "debugging tricks",
   "deploy rituals",
+  "tacit knowledge",
   "on-call instincts",
   "workarounds",
   "undocumented fixes",
   "hard-won context",
   "tribal knowledge",
-  "tacit knowledge",
 ];
 
 export function HeroSection() {

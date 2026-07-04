@@ -9,7 +9,7 @@ const stats = [
     suffix: "B",
     decimals: 0,
     description:
-      "Lost annually by Fortune 500 companies from knowledge-sharing failures",
+      "lost annually by Fortune 500 companies from knowledge-sharing failures",
   },
   {
     prefix: "$",
@@ -17,7 +17,7 @@ const stats = [
     suffix: "M",
     decimals: 1,
     description:
-      "What a 1,000-person company loses per year from knowledge transfer failures",
+      "lost per year by a 1,000-person company from failed knowledge transfer",
   },
   {
     prefix: "",
@@ -25,7 +25,7 @@ const stats = [
     suffix: "%",
     decimals: 0,
     description:
-      "Of institutional knowledge is unique to the individual and disappears when they leave",
+      "of institutional knowledge disappears when an employee leaves",
   },
 ];
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -64,6 +64,7 @@ export default function WaitlistPage() {
     "idle" | "submitting" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
     setIsVisible(true);
@@ -91,6 +92,7 @@ export default function WaitlistPage() {
       });
 
       if (res.ok) {
+        setFirstName(data.name.trim().split(/\s+/)[0]);
         setStatus("success");
       } else {
         const json = await res.json();
@@ -104,9 +106,14 @@ export default function WaitlistPage() {
   }
 
   return (
-    <main className="min-h-dvh md:h-dvh md:overflow-hidden flex flex-col">
+    <main className="relative min-h-dvh md:h-dvh md:overflow-hidden flex flex-col">
+      {/* Faint grid background — fades out behind the form */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:56px_56px] opacity-60 [mask-image:radial-gradient(ellipse_60%_75%_at_50%_50%,transparent_45%,black_100%)]"
+      />
       {/* Top bar */}
-      <header className="shrink-0 w-full max-w-[720px] mx-auto flex items-center justify-between pt-8 pb-2 px-6">
+      <header className="relative shrink-0 w-full max-w-[720px] mx-auto flex items-center justify-between pt-8 pb-2 px-6">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -118,19 +125,29 @@ export default function WaitlistPage() {
       </header>
 
       <div
-        className={`flex-1 min-h-0 w-full max-w-[720px] mx-auto px-6 pt-6 pb-8 transition-all duration-700 ${
+        className={`relative flex-1 min-h-0 w-full max-w-[720px] mx-auto px-6 pt-6 pb-8 transition-all duration-700 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
         {status === "success" ? (
-          <div className="text-center pt-20">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-border mb-6">
-              <Check className="w-6 h-6" />
-            </div>
-            <h1 className="text-[2.5rem] font-semibold tracking-[-0.02em] mb-3">
-              You&apos;re on the list.
+          <div className="h-full flex flex-col items-center justify-center text-center pb-16">
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.1] mb-4">
+              {(firstName
+                ? `You're on the list, ${firstName}.`
+                : "You're on the list."
+              )
+                .split(" ")
+                .map((word, i) => (
+                  <span
+                    key={i}
+                    className="inline-block animate-char-in whitespace-pre"
+                    style={{ animationDelay: `${i * 90}ms` }}
+                  >
+                    {word}{" "}
+                  </span>
+                ))}
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground animate-in fade-in slide-in-from-bottom-2 duration-500 delay-500 fill-mode-both">
               We&apos;ll be in touch soon.
             </p>
           </div>
