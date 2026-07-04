@@ -4,13 +4,31 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-const headline = "Institutional memory that doesn't walk out the door when engineers leave.";
+const words = [
+  "prompt libraries",
+  "debugging tricks",
+  "deploy rituals",
+  "on-call instincts",
+  "workarounds",
+  "undocumented fixes",
+  "hard-won context",
+  "tribal knowledge",
+  "tacit knowledge",
+];
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length);
+    }, 2500);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -21,22 +39,35 @@ export function HeroSection() {
         className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:56px_56px] opacity-60 [mask-image:radial-gradient(ellipse_65%_70%_at_50%_45%,black_25%,transparent_100%)]"
       />
       <div className="relative w-full max-w-[860px] mx-auto px-6 pb-16 text-center">
-        {/* Headline — staggered blur-in, word by word */}
-        <h1 className="text-[clamp(2.5rem,4vw+1rem,4rem)] font-semibold tracking-[-0.02em] leading-[1.08]">
-          {headline.split(" ").map((word, i) => (
-            <span
-              key={i}
-              className="inline-block animate-char-in whitespace-pre"
-              style={{ animationDelay: `${i * 60}ms` }}
-            >
-              {word}{" "}
+        {/* Headline — original cycling-word animation */}
+        <h1
+          className={`text-[clamp(2.5rem,4vw+1rem,4rem)] font-semibold tracking-[-0.02em] leading-[1.08] transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <span className="block">When an engineer</span>
+          <span className="block">
+            leaves, so does their{" "}
+            <span className="relative inline-block">
+              <span key={wordIndex} className="inline-flex">
+                {words[wordIndex].split("").map((char, i) => (
+                  <span
+                    key={`${wordIndex}-${i}`}
+                    className="inline-block animate-char-in"
+                    style={{ animationDelay: `${i * 50}ms` }}
+                  >
+                    {char === " " ? " " : char}
+                  </span>
+                ))}
+              </span>
+              <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-foreground" />
             </span>
-          ))}
+          </span>
         </h1>
 
         {/* Mission line */}
         <p
-          className={`mt-6 text-lg lg:text-xl text-muted-foreground leading-[1.55] max-w-[560px] mx-auto transition-all duration-700 delay-700 ${
+          className={`mt-6 text-lg lg:text-xl text-muted-foreground leading-[1.55] max-w-[560px] mx-auto transition-all duration-700 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
@@ -46,7 +77,7 @@ export function HeroSection() {
 
         {/* CTA */}
         <div
-          className={`mt-10 flex justify-center transition-all duration-700 delay-1000 ${
+          className={`mt-10 flex justify-center transition-all duration-700 delay-500 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
