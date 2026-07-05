@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 const words = [
-  "prompt library",
-  "debugging know-how",
-  "deploy ritual",
-  "tacit knowledge",
-  "on-call intuition",
-  "hard-won context",
   "tribal knowledge",
+  "hard-won context",
+  "tacit knowledge",
+  "debugging know-how",
+  "prompt library",
+  "deploy ritual",
+  "on-call intuition",
 ];
 
 export function HeroSection() {
@@ -30,7 +30,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative flex-1 flex items-center justify-center min-h-0 pt-12 md:pt-0">
+    <section className="relative flex-1 flex items-center justify-center min-h-0 pt-12 md:pt-8">
       {/* Faint grid background */}
       <div
         aria-hidden
