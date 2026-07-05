@@ -5,13 +5,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 const words = [
-  "prompt libraries",
-  "debugging tricks",
-  "deploy rituals",
+  "prompt library",
+  "debugging know-how",
+  "deploy ritual",
   "tacit knowledge",
-  "on-call instincts",
-  "workarounds",
-  "undocumented fixes",
+  "on-call intuition",
   "hard-won context",
   "tribal knowledge",
 ];
