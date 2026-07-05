@@ -8,10 +8,10 @@ import { z } from "zod";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const schema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Enter a valid work email"),
-  company: z.string().min(1, "Company is required"),
-  role: z.string().min(1, "Role is required"),
+  name: z.string().min(1, "Required"),
+  email: z.string().min(1, "Required").email("Invalid email"),
+  company: z.string().min(1, "Required"),
+  role: z.string().min(1, "Required"),
   knowledgeChallenge: z.string().optional(),
 });
 
@@ -37,22 +37,29 @@ function FieldLabel({
   children,
   required,
   optional,
+  error,
 }: {
   htmlFor?: string;
   children: React.ReactNode;
   required?: boolean;
   optional?: boolean;
+  error?: string;
 }) {
   return (
-    <label htmlFor={htmlFor} className="eyebrow block text-foreground/85">
-      {children}
-      {required && <span className="text-destructive ml-1">*</span>}
-      {optional && (
-        <span className="lowercase tracking-normal ml-1.5 text-faint">
-          (optional)
-        </span>
+    <div className="flex items-baseline justify-between gap-4">
+      <label htmlFor={htmlFor} className="eyebrow block text-foreground/85">
+        {children}
+        {required && <span className="text-red-600 ml-1">*</span>}
+        {optional && (
+          <span className="lowercase tracking-normal ml-1.5 text-faint">
+            (optional)
+          </span>
+        )}
+      </label>
+      {error && (
+        <span className="text-xs text-red-600 shrink-0">{error}</span>
       )}
-    </label>
+    </div>
   );
 }
 
@@ -163,7 +170,7 @@ export default function WaitlistPage() {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <div className="space-y-1.5">
-                <FieldLabel htmlFor="name" required>
+                <FieldLabel htmlFor="name" required error={errors.name?.message}>
                   Name
                 </FieldLabel>
                 <input
@@ -172,15 +179,10 @@ export default function WaitlistPage() {
                   className={inputClass}
                   {...register("name")}
                 />
-                {errors.name && (
-                  <p className="text-sm text-destructive">
-                    {errors.name.message}
-                  </p>
-                )}
               </div>
 
               <div className="space-y-1.5">
-                <FieldLabel htmlFor="email" required>
+                <FieldLabel htmlFor="email" required error={errors.email?.message}>
                   Work email
                 </FieldLabel>
                 <input
@@ -190,15 +192,10 @@ export default function WaitlistPage() {
                   className={inputClass}
                   {...register("email")}
                 />
-                {errors.email && (
-                  <p className="text-sm text-destructive">
-                    {errors.email.message}
-                  </p>
-                )}
               </div>
 
               <div className="space-y-1.5">
-                <FieldLabel htmlFor="company" required>
+                <FieldLabel htmlFor="company" required error={errors.company?.message}>
                   Company
                 </FieldLabel>
                 <input
@@ -207,15 +204,10 @@ export default function WaitlistPage() {
                   className={inputClass}
                   {...register("company")}
                 />
-                {errors.company && (
-                  <p className="text-sm text-destructive">
-                    {errors.company.message}
-                  </p>
-                )}
               </div>
 
               <div className="space-y-1.5">
-                <FieldLabel htmlFor="role" required>
+                <FieldLabel htmlFor="role" required error={errors.role?.message}>
                   Your role
                 </FieldLabel>
                 <input
@@ -224,15 +216,12 @@ export default function WaitlistPage() {
                   className={inputClass}
                   {...register("role")}
                 />
-                {errors.role && (
-                  <p className="text-sm text-destructive">
-                    {errors.role.message}
-                  </p>
-                )}
               </div>
 
               <div className="space-y-2.5">
-                <FieldLabel required>I&apos;m signing up as</FieldLabel>
+                <FieldLabel required error={signupTypeError ? "Required" : undefined}>
+                  I&apos;m signing up as
+                </FieldLabel>
                 <div className="flex flex-col sm:flex-row gap-3">
                   {signupOptions.map((option) => {
                     const selected = signupType === option.value;
@@ -255,11 +244,6 @@ export default function WaitlistPage() {
                     );
                   })}
                 </div>
-                {signupTypeError && (
-                  <p className="text-sm text-destructive">
-                    Select how you&apos;re signing up
-                  </p>
-                )}
               </div>
 
               <div className="space-y-1.5">
@@ -277,7 +261,7 @@ export default function WaitlistPage() {
               </div>
 
               {errorMessage && (
-                <p className="text-sm text-destructive">{errorMessage}</p>
+                <p className="text-sm text-red-600">{errorMessage}</p>
               )}
 
               <button
