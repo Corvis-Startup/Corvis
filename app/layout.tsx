@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Corvis — Offboarding into company memory',
+  title: 'Corvis — Turning offboarding into company memory',
   description:
     'Corvis backtests a departing engineer\'s real workflows, not just their claims, and turns the proven parts into a runnable memory layer your team keeps.',
   generator: 'v0.app',
