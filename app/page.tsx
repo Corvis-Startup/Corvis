@@ -11,7 +11,7 @@ export default function Home() {
           <img
             src="/corvislogo.png"
             alt="Corvis"
-            className="h-12 w-auto"
+            className="h-9 md:h-12 w-auto"
           />
           <FoundingTeam />
         </div>

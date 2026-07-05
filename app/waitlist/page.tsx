@@ -128,7 +128,7 @@ export default function WaitlistPage() {
           <ArrowLeft className="w-4 h-4" />
           Back
         </Link>
-        <img src="/corvislogo.png" alt="Corvis" className="h-9 w-auto" />
+        <img src="/corvislogo.png" alt="Corvis" className="h-7 md:h-9 w-auto" />
       </header>
 
       <div
