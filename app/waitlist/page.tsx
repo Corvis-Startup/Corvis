@@ -113,14 +113,14 @@ export default function WaitlistPage() {
   }
 
   return (
-    <main className="relative min-h-dvh md:h-dvh md:overflow-hidden flex flex-col">
+    <main className="relative min-h-dvh flex flex-col">
       {/* Faint grid background — fades out behind the form */}
       <div
         aria-hidden
         className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:56px_56px] opacity-60 [mask-image:radial-gradient(ellipse_60%_75%_at_50%_50%,transparent_45%,black_100%)]"
       />
       {/* Top bar */}
-      <header className="relative shrink-0 w-full max-w-[720px] mx-auto flex items-center justify-between pt-8 pb-2 px-6">
+      <header className="relative shrink-0 w-full max-w-[720px] mx-auto flex items-center justify-between pt-8 pb-0 px-6">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -132,12 +132,12 @@ export default function WaitlistPage() {
       </header>
 
       <div
-        className={`relative flex-1 min-h-0 w-full max-w-[720px] mx-auto px-6 pt-6 pb-8 transition-all duration-700 ${
+        className={`relative flex-1 flex flex-col w-full max-w-[720px] mx-auto px-6 pt-4 pb-6 transition-all duration-700 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
         {status === "success" ? (
-          <div className="h-full flex flex-col items-center justify-center text-center pb-16">
+          <div className="flex-1 flex flex-col items-center justify-center text-center pb-16">
             <h1 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.1] mb-4">
               {(firstName
                 ? `You're on the list, ${firstName}.`
