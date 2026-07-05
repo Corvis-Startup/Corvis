@@ -4,7 +4,7 @@ import { FoundingTeam } from "@/components/founding-team";
 
 export default function Home() {
   return (
-    <main className="min-h-dvh md:h-dvh flex flex-col md:overflow-hidden">
+    <main className="min-h-dvh flex flex-col md:[@media(min-height:560px)]:h-dvh md:[@media(min-height:560px)]:overflow-hidden">
       {/* Logo, top right */}
       <header className="shrink-0">
         <div className="max-w-[1100px] mx-auto flex items-center justify-between pt-7 pb-2 px-6">
