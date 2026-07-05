@@ -12,20 +12,19 @@ const stats = [
       "lost annually by Fortune 500 companies from knowledge-sharing failures",
   },
   {
-    prefix: "$",
-    value: 2.7,
-    suffix: "M",
-    decimals: 1,
-    description:
-      "lost per year by a 1,000-person company from failed knowledge transfer",
-  },
-  {
-    prefix: "",
     value: 42,
     suffix: "%",
     decimals: 0,
     description:
       "of institutional knowledge disappears when an employee leaves",
+  },
+  {
+    prefix: "",
+    value: 6,
+    suffix: " months",
+    decimals: 0,
+    description:
+      "for a replacement engineer to reach full productivity after a senior leaves",
   },
 ];
 
