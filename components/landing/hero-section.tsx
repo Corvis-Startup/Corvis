@@ -4,7 +4,17 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-const words = ["Claude Code", "Cursor", "Slack fixes", "tribal knowledge"];
+const words = [
+  "prompt libraries",
+  "debugging tricks",
+  "deploy rituals",
+  "tacit knowledge",
+  "on-call instincts",
+  "workarounds",
+  "undocumented fixes",
+  "hard-won context",
+  "tribal knowledge",
+];
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,91 +32,66 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative border-b border-border">
-      <div className="max-w-[1100px] mx-auto px-6 pt-40 pb-24">
-        {/* Eyebrow */}
-        <div
-          className={`mb-8 transition-all duration-700 ${
+    <section className="relative flex-1 flex items-center justify-center min-h-0">
+      {/* Faint grid background */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:56px_56px] opacity-60 [mask-image:radial-gradient(ellipse_65%_70%_at_50%_45%,black_25%,transparent_100%)]"
+      />
+      <div className="relative w-full max-w-[860px] mx-auto px-6 pb-16 text-center">
+        {/* Headline — original cycling-word animation */}
+        <h1
+          className={`text-[clamp(2.5rem,4vw+1rem,4rem)] font-semibold tracking-[-0.02em] leading-[1.08] transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <span className="block">When an engineer</span>
+          <span className="block">
+            leaves, so does their{" "}
+            <span className="relative inline-block">
+              <span key={wordIndex} className="inline-flex">
+                {words[wordIndex].split("").map((char, i) => (
+                  <span
+                    key={`${wordIndex}-${i}`}
+                    className="inline-block animate-char-in"
+                    style={{ animationDelay: `${i * 50}ms` }}
+                  >
+                    {char === " " ? " " : char}
+                  </span>
+                ))}
+              </span>
+              <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-foreground" />
+            </span>
+          </span>
+        </h1>
+
+        {/* Mission line */}
+        <p
+          className={`mt-6 text-lg lg:text-xl text-muted-foreground leading-[1.55] max-w-[560px] mx-auto transition-all duration-700 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <span className="eyebrow">Executable company memory</span>
-        </div>
+          Turning engineering offboarding into institutional memory that humans
+          and AI agents can actually use.
+        </p>
 
-        {/* Main headline */}
-        <div className="mb-12">
-          <h1
-            className={`text-[clamp(3rem,5vw+1rem,4.5rem)] font-semibold tracking-[-0.02em] leading-[1.05] transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-          >
-            <span className="block">When an engineer</span>
-            <span className="block">leaves, so does</span>
-            <span className="block">
-              their{" "}
-              <span className="relative inline-block">
-                <span key={wordIndex} className="inline-flex">
-                  {words[wordIndex].split("").map((char, i) => (
-                    <span
-                      key={`${wordIndex}-${i}`}
-                      className="inline-block animate-char-in"
-                      style={{
-                        animationDelay: `${i * 50}ms`,
-                      }}
-                    >
-                      {char === " " ? " " : char}
-                    </span>
-                  ))}
-                </span>
-                <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-foreground" />
-              </span>
-            </span>
-          </h1>
-        </div>
-
-        {/* Description */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
-          <p
-            className={`text-lg text-muted-foreground leading-[1.7] max-w-[720px] transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            Their work now lives inside personal AI tools, Slack threads, and tribal fixes
-            that never surface in an exit interview. Corvis backtests their real workflows
-            in a sandbox, verifies what actually works, and keeps the proven parts runnable.
-          </p>
-
-          {/* CTAs */}
-          <div
-            className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            <Button size="lg" className="px-8 h-12 text-base rounded-[2px] group" asChild>
-              <a href="#early-access">
-                Book a demo
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-12 px-8 text-base rounded-[2px]"
-              asChild
-            >
-              <a href="#how-it-works">See how it works</a>
-            </Button>
-          </div>
-        </div>
-
-        {/* What walks out the door */}
-        <p
-          className={`eyebrow mt-20 transition-all duration-700 delay-500 ${
-            isVisible ? "opacity-100" : "opacity-0"
+        {/* CTA */}
+        <div
+          className={`mt-10 flex justify-center transition-all duration-700 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Claude Code · Cursor · Slack threads · prompt libraries — none of it survives offboarding
-        </p>
+          <Button
+            size="lg"
+            className="btn-shine px-8 h-12 text-base rounded-[2px] group"
+            asChild
+          >
+            <a href="/waitlist">
+              Join waitlist
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </a>
+          </Button>
+        </div>
       </div>
     </section>
   );
