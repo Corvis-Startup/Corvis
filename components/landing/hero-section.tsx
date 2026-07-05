@@ -30,7 +30,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative flex-1 flex items-center justify-center min-h-0">
+    <section className="relative flex-1 flex items-center justify-center min-h-0 pt-12 md:pt-0">
       {/* Faint grid background */}
       <div
         aria-hidden
@@ -39,7 +39,7 @@ export function HeroSection() {
       <div className="relative w-full max-w-[860px] mx-auto px-6 pb-16 text-center">
         {/* Headline — original cycling-word animation */}
         <h1
-          className={`text-[clamp(2.5rem,4vw+1rem,4rem)] font-semibold tracking-[-0.02em] leading-[1.08] transition-all duration-1000 ${
+          className={`text-[1.875rem] sm:text-[clamp(2.5rem,4vw+1rem,4rem)] font-semibold tracking-[-0.02em] leading-[1.08] transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
