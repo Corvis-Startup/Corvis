@@ -12,11 +12,11 @@ const stats = [
       "lost annually by Fortune 500 companies from knowledge-sharing failures",
   },
   {
-    value: 42,
+    value: 65,
     suffix: "%",
     decimals: 0,
     description:
-      "of institutional knowledge disappears when an employee leaves",
+      "of software projects depend on just 1-2 key developers",
   },
   {
     prefix: "",
